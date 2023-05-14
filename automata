@@ -1,0 +1,23 @@
+class AFD:
+    def __init__(self):
+        self.states = {"q0", "q1"} # conjunto de estados
+        self.symbols = {"0", "1"} # alfabeto
+        self.transitions = {
+            "q0": {"0": "q1", "1": "q0"},
+            "q1": {"0": "q0", "1": "q1"}
+        } # función de transición
+        self.start_state = "q0" # estado inicial
+        self.accept_states = {"q0"} # conjunto de estados de aceptación
+    
+    def run(self, input_string):
+        current_state = self.start_state
+        for symbol in input_string:
+            current_state = self.transitions[current_state][symbol]
+        return current_state in self.accept_states
+--------------------------------------------------------------------------
+automaton = AFD()
+input_string = "100100"
+print(automaton.run(input_string)) # Output: True
+
+input_string = "100101"
+print(automaton.run(input_string)) # Output: False
